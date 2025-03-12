@@ -13,11 +13,9 @@ public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
-
     private String seatNumber;
     private boolean isOccupied;
     private String seatClass;

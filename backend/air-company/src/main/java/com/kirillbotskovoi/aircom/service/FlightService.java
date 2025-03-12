@@ -42,7 +42,7 @@ public class FlightService {
                 String flightNumber = (String) ((Map<String, Object>) flightData.get("flight")).get("iata");
                 String departureAirport = (String) ((Map<String, Object>) flightData.get("departure")).get("iata");
                 String arrivalAirport = (String) ((Map<String, Object>) flightData.get("arrival")).get("iata");
-                
+
                 String departureTimeStr = (String) ((Map<String, Object>) flightData.get("departure")).get("scheduled");
                 String arrivalTimeStr = (String) ((Map<String, Object>) flightData.get("arrival")).get("scheduled");
 
