@@ -22,11 +22,13 @@ public class FlightService {
     private final FlightRepository flightRepository;
     private final FlightConverter flightConverter;
     private final RestTemplate restTemplate;
+    private final SeatGenerator seatGenerator;
 
     @Value("${aviationstack.api.key}")
     private String apiKey;
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+
 
     public void fetchAndSaveFlights() {
         String url = "http://api.aviationstack.com/v1/flights?access_key=" + apiKey;
@@ -61,7 +63,6 @@ public class FlightService {
                         .seats(null)
                         .build();
 
-                SeatGenerator seatGenerator = new SeatGenerator();
                 flight.setSeats(seatGenerator.generateSeats(flight));
 
                 flightRepository.save(flight);

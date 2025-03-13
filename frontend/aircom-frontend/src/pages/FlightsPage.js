@@ -19,18 +19,18 @@ export default function FlightsPage() {
             <div className="row">
                 {flights.map(flight => (
                     <div key={flight.id} className="col-md-4">
-                        <div className="card mb-3">
+                        <div className="card mb-3 shadow-sm">
                             <div className="card-body">
                                 <h5 className="card-title">Рейс {flight.flightNumber}</h5>
-                                <p className="card-text">Из: {flight.departureAirport}</p>
-                                <p className="card-text">В: {flight.arrivalAirport}</p>
-                                <p className="card-text">Время вылета: {flight.departureTime}</p>
-                                <p className="card-text">Цена: {flight.price} €</p>
+                                <p className="card-text"><strong>Из:</strong> {flight.departureAirport}</p>
+                                <p className="card-text"><strong>В:</strong> {flight.arrivalAirport}</p>
+                                <p className="card-text"><strong>Время вылета:</strong> {new Date(flight.departureTime).toLocaleString()}</p>
+                                <p className="card-text"><strong>Базовая цена:</strong> {flight.price} €</p>
                                 <Button 
                                     variant="primary"
                                     onClick={() => navigate(`/seats/${flight.id}`)}
                                 >
-                                    Подробнее
+                                    Посмотреть места
                                 </Button>
                             </div>
                         </div>

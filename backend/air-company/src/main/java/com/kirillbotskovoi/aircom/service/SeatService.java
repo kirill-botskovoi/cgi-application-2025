@@ -22,6 +22,7 @@ public class SeatService {
                         .seatNumber(seat.getSeatNumber())
                         .isOccupied(seat.isOccupied())
                         .seatClass(seat.getSeatClass())
+                        .price(seat.getPrice())
                         .build())
                 .collect(Collectors.toList());
     }

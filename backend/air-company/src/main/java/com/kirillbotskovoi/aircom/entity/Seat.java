@@ -19,4 +19,5 @@ public class Seat {
     private String seatNumber;
     private boolean isOccupied;
     private String seatClass;
+    private Double price;
 }

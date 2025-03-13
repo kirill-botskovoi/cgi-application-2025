@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Card } from "react-bootstrap";
 
 export default function SeatsPage() {
     const { flightId } = useParams();
@@ -18,15 +19,16 @@ export default function SeatsPage() {
             <div className="row">
                 {seats.map(seat => (
                     <div key={seat.id} className="col-md-3">
-                        <div className={`card mb-3 ${seat.occupied ? "bg-danger text-white" : "bg-success text-white"}`}>
-                            <div className="card-body">
+                        <Card className={`mb-3 ${seat.occupied ? "bg-danger text-white" : "bg-success text-white"}`}>
+                            <Card.Body>
                                 <h5 className="card-title">Место {seat.seatNumber}</h5>
-                                <p className="card-text">Класс: {seat.seatClass}</p>
+                                <p className="card-text"><strong>Класс:</strong> {seat.seatClass}</p>
+                                <p className="card-text"><strong>Цена:</strong> {seat.price.toFixed(2)} €</p>
                                 <p className="card-text">
-                                    Статус: {seat.occupied ? "Занято" : "Свободно"}
+                                    <strong>Статус:</strong> {seat.occupied ? "Занято" : "Свободно"}
                                 </p>
-                            </div>
-                        </div>
+                            </Card.Body>
+                        </Card>
                     </div>
                 ))}
             </div>
