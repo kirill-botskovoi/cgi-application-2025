@@ -25,7 +25,6 @@ export default function FlightsPage() {
                                 <p className="card-text"><strong>Из:</strong> {flight.departureAirport}</p>
                                 <p className="card-text"><strong>В:</strong> {flight.arrivalAirport}</p>
                                 <p className="card-text"><strong>Время вылета:</strong> {new Date(flight.departureTime).toLocaleString()}</p>
-                                <p className="card-text"><strong>Базовая цена:</strong> {flight.price} €</p>
                                 <Button 
                                     variant="primary"
                                     onClick={() => navigate(`/seats/${flight.id}`)}

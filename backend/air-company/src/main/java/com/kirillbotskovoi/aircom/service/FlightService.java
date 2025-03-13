@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -27,8 +28,8 @@ public class FlightService {
     @Value("${aviationstack.api.key}")
     private String apiKey;
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
     public void fetchAndSaveFlights() {
         String url = "http://api.aviationstack.com/v1/flights?access_key=" + apiKey;
@@ -59,9 +60,9 @@ public class FlightService {
                         .arrivalAirport(arrivalAirport)
                         .departureTime(departureTime)
                         .arrivalTime(arrivalTime)
-                        .price(price)
                         .seats(null)
                         .build();
+
 
                 flight.setSeats(seatGenerator.generateSeats(flight));
 
@@ -72,9 +73,20 @@ public class FlightService {
         }
     }
 
+    public void generateSeats(List<Flight> flights){
+        SeatGenerator seatGenerator = new SeatGenerator();
+        for (Flight flight : flights) {
+            flight.setSeats(seatGenerator.generateSeats(flight));
+        }
+    }
+
     public List<FlightResponseDTO> getAllFlights() {
         return flightRepository.findAll().stream()
                 .map(flightConverter::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<Flight> getAllFlightsNoDto() {
+        return new ArrayList<>(flightRepository.findAll());
     }
 }

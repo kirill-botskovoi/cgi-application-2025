@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -41,6 +42,12 @@ public class SeatGenerator {
     @Value("${seat.economyClassRatio}")
     private double economyClassRatio;
 
+    @Value("${seat.basePrice.min}")
+    private int seatMinPrice;
+
+    @Value("${seat.basePrice.max}")
+    private int seatMaxPrice;
+
     @Value("${seat.priceMultiplier.economy}")
     private double economyMultiplier;
 
@@ -55,13 +62,24 @@ public class SeatGenerator {
     public List<Seat> generateSeats(Flight flight) {
         List<Seat> seats = new ArrayList<>();
         int totalRows = random.nextInt(maxRows - minRows + 1) + minRows;
-        int seatsPerRow = (random.nextInt((maxSeatsPerRow - minSeatsPerRow) / 2 + 1) + minSeatsPerRow / 2) * 2;
+        int seatsPerRow = random.nextInt(maxSeatsPerRow - minSeatsPerRow + 1) + minSeatsPerRow;
 
         int firstClassRows = (int) (totalRows * firstClassRatio);
         int businessClassRows = (int) (totalRows * businessClassRatio);
         int economyClassRows = totalRows - firstClassRows - businessClassRows;
 
-        double occupancyRate = minOccupancy + (maxOccupancy - minOccupancy) * random.nextDouble();
+        double rawOccupancyRate = minOccupancy + (maxOccupancy - minOccupancy) * random.nextDouble();
+        int occupancyRate = (int) Math.round(rawOccupancyRate * 100);
+
+        int totalSeats = totalRows * seatsPerRow;
+        int occupiedSeatsCount = (int) Math.round((occupancyRate / 100.0) * totalSeats);
+
+        List<Boolean> occupancyList = new ArrayList<>(Collections.nCopies(occupiedSeatsCount, true));
+        occupancyList.addAll(Collections.nCopies(totalSeats - occupiedSeatsCount, false));
+        Collections.shuffle(occupancyList, random);
+
+        int seatIndex = 0;
+        int basePrice = random.nextInt(seatMaxPrice - seatMinPrice + 1) + seatMinPrice;
 
         for (int row = 1; row <= totalRows; row++) {
             String seatClass;
@@ -77,12 +95,13 @@ public class SeatGenerator {
                 priceMultiplier = economyMultiplier;
             }
 
-            for (char seat = 'A'; seat < 'A' + seatsPerRow; seat++) {
-                boolean isOccupied = random.nextDouble() < occupancyRate;
-                double seatPrice = flight.getPrice() * priceMultiplier;
+            for (int seatNum = 1; seatNum <= seatsPerRow; seatNum++) {
+                boolean isOccupied = occupancyList.get(seatIndex++);
+                double seatPrice = (double) basePrice * priceMultiplier;
 
                 seats.add(Seat.builder()
-                        .seatNumber(row + "" + seat)
+                        .rowNumber(row)
+                        .seatIndex(seatNum)
                         .isOccupied(isOccupied)
                         .seatClass(seatClass)
                         .price(seatPrice)

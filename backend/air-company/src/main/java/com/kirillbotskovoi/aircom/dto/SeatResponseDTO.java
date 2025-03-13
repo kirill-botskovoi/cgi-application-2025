@@ -8,8 +8,9 @@ import lombok.*;
 @Builder
 public class SeatResponseDTO {
     private Long id;
-    private String seatNumber;
-    private boolean isOccupied;
+    private Integer rowNumber;
+    private Integer seatIndex;
+    private Boolean isOccupied;
     private String seatClass;
     private Double price;
 }
