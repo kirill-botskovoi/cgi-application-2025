@@ -45,7 +45,6 @@ export default function FlightsPage() {
             filtered = filtered.filter(flight => new Date(flight.departureTime).getHours() <= new Date(`1970-01-01T${filters.timeTo}:00`).getHours());
         }
 
-
         setFilteredFlights(filtered);
     };
 
