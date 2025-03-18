@@ -29,12 +29,22 @@ public class JwtUtil {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject(userDetails.getUsername())  // Use setSubject() instead of subject()
+                .setSubject(userDetails.getUsername())
+                .claim("email", userDetails.getEmail())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + lifetime))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256) // Correct signing method
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+    public String getEmailFromJwt(String token) {
+        JwtParser jwtParser = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build();
+
+        Claims claims = jwtParser.parseClaimsJws(token).getBody();
+        return claims.get("email", String.class);
+    }
+
     public String getNameFromJwt(String token) {
         JwtParser jwtParser = Jwts.parserBuilder()
                 .setSigningKey(getSigningKey()) // Updated parser method
