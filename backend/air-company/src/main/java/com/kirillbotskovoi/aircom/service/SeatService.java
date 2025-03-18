@@ -19,9 +19,11 @@ public class SeatService {
         return seats.stream()
                 .map(seat -> SeatResponseDTO.builder()
                         .id(seat.getId())
-                        .seatNumber(seat.getSeatNumber())
+                        .rowNumber(seat.getRowNumber())
+                        .seatIndex(seat.getSeatIndex())
                         .isOccupied(seat.isOccupied())
                         .seatClass(seat.getSeatClass())
+                        .price(seat.getPrice())
                         .build())
                 .collect(Collectors.toList());
     }

@@ -4,7 +4,10 @@ import com.kirillbotskovoi.aircom.dto.SeatResponseDTO;
 import com.kirillbotskovoi.aircom.service.SeatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,4 +21,5 @@ public class SeatController {
     public ResponseEntity<List<SeatResponseDTO>> getSeatsByFlight(@PathVariable Long flightId) {
         return ResponseEntity.ok(seatService.getSeatsByFlightId(flightId));
     }
+
 }

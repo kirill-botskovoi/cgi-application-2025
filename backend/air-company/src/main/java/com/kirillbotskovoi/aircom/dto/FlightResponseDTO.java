@@ -15,6 +15,5 @@ public class FlightResponseDTO {
     private String arrivalAirport;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
-    private double price;
     private List<Long> seatIds;
 }

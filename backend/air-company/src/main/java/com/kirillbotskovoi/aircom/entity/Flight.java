@@ -25,7 +25,6 @@ public class Flight {
     private String arrivalAirport;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
-    private Double price;
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seat> seats;

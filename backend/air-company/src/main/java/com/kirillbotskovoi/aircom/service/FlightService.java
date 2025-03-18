@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,9 +23,11 @@ public class FlightService {
     private final FlightRepository flightRepository;
     private final FlightConverter flightConverter;
     private final RestTemplate restTemplate;
+    private final SeatGenerator seatGenerator;
 
     @Value("${aviationstack.api.key}")
     private String apiKey;
+
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
@@ -57,11 +60,10 @@ public class FlightService {
                         .arrivalAirport(arrivalAirport)
                         .departureTime(departureTime)
                         .arrivalTime(arrivalTime)
-                        .price(price)
                         .seats(null)
                         .build();
 
-                SeatGenerator seatGenerator = new SeatGenerator();
+
                 flight.setSeats(seatGenerator.generateSeats(flight));
 
                 flightRepository.save(flight);
@@ -71,9 +73,20 @@ public class FlightService {
         }
     }
 
+    public void generateSeats(List<Flight> flights){
+        SeatGenerator seatGenerator = new SeatGenerator();
+        for (Flight flight : flights) {
+            flight.setSeats(seatGenerator.generateSeats(flight));
+        }
+    }
+
     public List<FlightResponseDTO> getAllFlights() {
         return flightRepository.findAll().stream()
                 .map(flightConverter::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<Flight> getAllFlightsNoDto() {
+        return new ArrayList<>(flightRepository.findAll());
     }
 }

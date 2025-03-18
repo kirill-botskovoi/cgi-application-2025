@@ -16,7 +16,9 @@ public class Seat {
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
-    private String seatNumber;
+    private Integer rowNumber;
+    private Integer seatIndex;
     private boolean isOccupied;
     private String seatClass;
+    private Double price;
 }

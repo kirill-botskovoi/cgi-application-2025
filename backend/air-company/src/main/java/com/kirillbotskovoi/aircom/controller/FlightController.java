@@ -27,4 +27,11 @@ public class FlightController {
         flightService.fetchAndSaveFlights();
         return ResponseEntity.ok("Рейсы загружены успешно");
     }
+
+    @PostMapping("/generateSeats")
+    public ResponseEntity<String> generateSeats() {
+        flightService.generateSeats(flightService.getAllFlightsNoDto());
+        return ResponseEntity.ok("Seats successfully generated!");
+    }
+
 }

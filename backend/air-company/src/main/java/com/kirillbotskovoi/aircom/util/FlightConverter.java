@@ -23,7 +23,6 @@ public class FlightConverter {
                 .arrivalAirport(flight.getArrivalAirport())
                 .departureTime(flight.getDepartureTime())
                 .arrivalTime(flight.getArrivalTime())
-                .price(flight.getPrice())
                 .seatIds(seatIds)
                 .build();
     }
