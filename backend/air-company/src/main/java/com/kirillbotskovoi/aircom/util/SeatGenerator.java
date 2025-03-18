@@ -62,7 +62,7 @@ public class SeatGenerator {
     public List<Seat> generateSeats(Flight flight) {
         List<Seat> seats = new ArrayList<>();
         int totalRows = random.nextInt(maxRows - minRows + 1) + minRows;
-        int seatsPerRow = random.nextInt(maxSeatsPerRow - minSeatsPerRow + 1) + minSeatsPerRow;
+        int seatsPerRow = (random.nextInt((maxSeatsPerRow - minSeatsPerRow) / 2 + 1) * 2) + minSeatsPerRow;
 
         int firstClassRows = (int) (totalRows * firstClassRatio);
         int businessClassRows = (int) (totalRows * businessClassRatio);
