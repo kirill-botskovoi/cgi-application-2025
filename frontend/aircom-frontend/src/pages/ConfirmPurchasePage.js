@@ -26,13 +26,24 @@ export default function ConfirmPurchasePage() {
         const fetchSeatDetails = async () => {
             if (!location.state || !location.state.seats) return;
 
-            const details = await Promise.all(
+            const apiSeats = await Promise.all(
                 location.state.seats.map(seat =>
                     fetch(`http://localhost:8080/api/seats/${seat.id}`)
                         .then(response => response.json())
                 )
             );
-            setSeatsDetails(details);
+        
+            // Объединяем данные: находим ID в исходных местах по rowNumber и seatIndex
+            const combinedSeats = apiSeats.map(apiSeat => {
+                const originalSeat = location.state.seats.find(
+                    seat => seat.rowNumber === apiSeat.rowNumber && seat.seatIndex === apiSeat.seatIndex
+                );
+                return { ...apiSeat, id: originalSeat?.id }; // Добавляем ID
+            });
+        
+            console.log("Объединённые данные:", combinedSeats);
+        
+            setSeatsDetails(combinedSeats);
         };
 
         fetchSeatDetails();
@@ -51,26 +62,24 @@ export default function ConfirmPurchasePage() {
                 return;
             }
 
-            const bookingRequests = seatsDetails.map(seat => ({
-                seatId: seat.id,
-                userId: null
-            }));
+            console.log(seatsDetails)
 
-            console.log(bookingRequests)
-
-
-            const response = await fetch("http://localhost:8080/api/bookings/bulk", {
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify(bookingRequests)
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(errorText);
+            for (let i = 0; i < seatsDetails.length; i++) {
+                const seat = seatsDetails[i];
+    
+                const response = await fetch("http://localhost:8080/api/bookings", {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify(seat.id)
+                });
+    
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Ошибка бронирования места ${seat.rowNumber}${String.fromCharCode(65 + seat.seatIndex)}: ${errorText}`);
+                }
             }
 
             setAlertMessage("Оплата успешно прошла. Билеты отправлены на вашу почту.");

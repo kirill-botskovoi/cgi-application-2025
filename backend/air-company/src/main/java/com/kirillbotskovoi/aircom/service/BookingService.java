@@ -1,10 +1,14 @@
 package com.kirillbotskovoi.aircom.service;
 
-import com.kirillbotskovoi.aircom.entity.*;
-import com.kirillbotskovoi.aircom.repository.*;
+import com.kirillbotskovoi.aircom.entity.Booking;
+import com.kirillbotskovoi.aircom.entity.Seat;
+import com.kirillbotskovoi.aircom.entity.User;
+import com.kirillbotskovoi.aircom.repository.BookingRepository;
+import com.kirillbotskovoi.aircom.repository.FlightRepository;
+import com.kirillbotskovoi.aircom.repository.SeatRepository;
+import com.kirillbotskovoi.aircom.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,31 +21,32 @@ public class BookingService {
     private final SeatRepository seatRepository;
     private final FlightRepository flightRepository;
 
-    @Transactional
     public Booking createBooking(String email, Long seatId) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         Seat seat = seatRepository.findById(seatId)
-                .orElseThrow(() -> new RuntimeException("Место не найдено"));
+                .orElseThrow(() -> new RuntimeException("Seat not found"));
 
         Optional<Booking> existingBooking = bookingRepository.findBySeat(seat);
         if (existingBooking.isPresent()) {
-            throw new RuntimeException("Место уже забронировано");
+            throw new RuntimeException("Seat already booked");
         }
 
-        Booking booking = Booking.builder()
+        seatRepository.getSeatById(seatId).setOccupied(true);
+
+        return bookingRepository.save(
+                Booking.builder()
                 .user(user)
                 .seat(seat)
                 .flight(seat.getFlight())
-                .build();
-
-        return bookingRepository.save(booking);
+                .build()
+        );
     }
 
     public List<Booking> getUserBookings(String email) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         return bookingRepository.findByUser(user);
     }

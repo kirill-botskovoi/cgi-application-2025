@@ -27,6 +27,7 @@ export default function SeatsPage() {
     };
 
     const handlePurchase = () => {
+        console.log("Отправляем в ConfirmPurchasePage:", selectedSeats); // <-- Проверка
         navigate("/confirm-purchase", { state: { seats: selectedSeats } });
     };
 
