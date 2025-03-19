@@ -27,8 +27,6 @@ public class BookingController {
         String email = jwtUtil.getEmailFromJwt(token.substring(7));
         if (email == null) {
             return ResponseEntity.status(403).body("Wrong token");
-        } else{
-            System.out.println("EMAIL from jwt: " + email);
         }
 
         try {

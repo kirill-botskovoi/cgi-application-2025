@@ -18,7 +18,7 @@ export default function FlightsPage() {
                 const airports = [...new Set(data.map(flight => flight.departureAirport))];
                 setAirports(airports);
             })
-            .catch(error => console.error("Ошибка загрузки рейсов", error));
+            .catch(error => console.error("Erroe while loading flights", error));
     }, []);
 
     const handleFilterApply = (filters) => {
@@ -50,22 +50,22 @@ export default function FlightsPage() {
 
     return (
         <div className="container mt-4">
-            <h1 className="text-center mb-4">Список рейсов</h1>
+            <h1 className="text-center mb-4">Flights</h1>
             <FlightFilter airports={airports} onApplyFilter={handleFilterApply} />
             <div className="row">
                 {filteredFlights.map(flight => (
                     <div key={flight.id} className="col-md-4">
                         <div className="card mb-3 shadow-sm">
                             <div className="card-body">
-                                <h5 className="card-title">Рейс {flight.flightNumber}</h5>
-                                <p className="card-text"><strong>Из:</strong> {flight.departureAirport}</p>
-                                <p className="card-text"><strong>В:</strong> {flight.arrivalAirport}</p>
-                                <p className="card-text"><strong>Время вылета:</strong> {new Date(flight.departureTime).toLocaleString()}</p>
+                                <h5 className="card-title">Flight nr {flight.flightNumber}</h5>
+                                <p className="card-text"><strong>From:</strong> {flight.departureAirport}</p>
+                                <p className="card-text"><strong>To:</strong> {flight.arrivalAirport}</p>
+                                <p className="card-text"><strong>Departure time:</strong> {new Date(flight.departureTime).toLocaleString()}</p>
                                 <Button 
                                     variant="primary"
                                     onClick={() => navigate(`/seats/${flight.id}`)}
                                 >
-                                    Посмотреть места
+                                    Check seats
                                 </Button>
                             </div>
                         </div>

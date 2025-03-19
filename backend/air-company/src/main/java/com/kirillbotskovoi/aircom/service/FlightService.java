@@ -36,7 +36,7 @@ public class FlightService {
 
         Map<String, Object> response = restTemplate.getForObject(url, Map.class);
         if (response == null || !response.containsKey("data")) {
-            throw new RuntimeException("Ошибка при получении данных от API");
+            throw new RuntimeException("API fetch error");
         }
 
         List<Map<String, Object>> flightsData = (List<Map<String, Object>>) response.get("data");
@@ -68,7 +68,7 @@ public class FlightService {
 
                 flightRepository.save(flight);
             } catch (Exception e) {
-                System.err.println("Ошибка обработки рейса: " + e.getMessage());
+                System.err.println("Error processing the flight:  " + e.getMessage());
             }
         }
     }

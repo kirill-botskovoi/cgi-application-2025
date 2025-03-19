@@ -12,7 +12,7 @@ export default function ConfirmPurchasePage() {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
-            setAlertMessage("Необходимо авторизоваться для покупки билетов.");
+            setAlertMessage("You have to authorize to buy tickets.");
             return;
         }
 
@@ -21,7 +21,7 @@ export default function ConfirmPurchasePage() {
         })
         .then(response => response.json())
         .then(data => setEmail(data.email))
-        .catch(error => console.error("Ошибка загрузки данных пользователя", error));
+        .catch(error => console.error("Error loading user data", error));
 
         const fetchSeatDetails = async () => {
             if (!location.state || !location.state.seats) return;
@@ -33,15 +33,14 @@ export default function ConfirmPurchasePage() {
                 )
             );
         
-            // Объединяем данные: находим ID в исходных местах по rowNumber и seatIndex
             const combinedSeats = apiSeats.map(apiSeat => {
                 const originalSeat = location.state.seats.find(
                     seat => seat.rowNumber === apiSeat.rowNumber && seat.seatIndex === apiSeat.seatIndex
                 );
-                return { ...apiSeat, id: originalSeat?.id }; // Добавляем ID
+                return { ...apiSeat, id: originalSeat?.id };
             });
         
-            console.log("Объединённые данные:", combinedSeats);
+            console.log("United data:", combinedSeats);
         
             setSeatsDetails(combinedSeats);
         };
@@ -53,12 +52,12 @@ export default function ConfirmPurchasePage() {
         try {
             const token = localStorage.getItem("token");
             if (!token) {
-                setAlertMessage("Необходимо авторизоваться для покупки билетов.");
+                setAlertMessage("You have to authorize to buy tickets.");
                 return;
             }
 
             if (seatsDetails.length === 0) {
-                setAlertMessage("Ошибка: данные о местах не загружены.");
+                setAlertMessage("Error: Seat data was not loaded");
                 return;
             }
 
@@ -78,25 +77,25 @@ export default function ConfirmPurchasePage() {
     
                 if (!response.ok) {
                     const errorText = await response.text();
-                    throw new Error(`Ошибка бронирования места ${seat.rowNumber}${String.fromCharCode(65 + seat.seatIndex)}: ${errorText}`);
+                    throw new Error(`Error booking seat ${seat.rowNumber}${String.fromCharCode(65 + seat.seatIndex)}: ${errorText}`);
                 }
             }
 
-            setAlertMessage("Оплата успешно прошла. Билеты отправлены на вашу почту.");
+            setAlertMessage("Success! Tickets are sent to email");
             setTimeout(() => navigate("/"), 3000);
         } catch (error) {
-            console.error("Ошибка при бронировании", error);
-            setAlertMessage(error.message || "Ошибка при обработке покупки.");
+            console.error("Error while booking", error);
+            setAlertMessage(error.message || "Error while booking");
         }
     };
 
     return (
         <Container className="mt-4">
-            <h1 className="text-center mb-4">Подтверждение покупки</h1>
+            <h1 className="text-center mb-4">Purchase confirmation</h1>
             {alertMessage && <Alert variant="info">{alertMessage}</Alert>}
             <Card className="mb-3">
                 <Card.Body>
-                    <h5>Ваши билеты</h5>
+                    <h5>Your Tickets</h5>
                     <ul>
                         {seatsDetails.map(seat => (
                             <li key={seat.id}>
@@ -105,7 +104,7 @@ export default function ConfirmPurchasePage() {
                         ))}
                     </ul>
                     <Form.Group>
-                        <Form.Label>Ваш email</Form.Label>
+                        <Form.Label>Your Email</Form.Label>
                         <Form.Control 
                             type="email" 
                             value={email} 
@@ -113,7 +112,7 @@ export default function ConfirmPurchasePage() {
                         />
                     </Form.Group>
                     <Button variant="success" className="mt-3" onClick={handleConfirmPurchase}>
-                        Подтвердить покупку
+                        Confirm
                     </Button>
                 </Card.Body>
             </Card>

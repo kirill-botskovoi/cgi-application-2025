@@ -27,7 +27,7 @@ export default function SeatsPage() {
     };
 
     const handlePurchase = () => {
-        console.log("Отправляем в ConfirmPurchasePage:", selectedSeats); // <-- Проверка
+        console.log("Отправляем в ConfirmPurchasePage:", selectedSeats);
         navigate("/confirm-purchase", { state: { seats: selectedSeats } });
     };
 
@@ -39,7 +39,7 @@ export default function SeatsPage() {
 
     return (
         <Container className="mt-4">
-            <h1 className="text-center mb-4">План салона самолета</h1>
+            <h1 className="text-center mb-4">Plane seat map</h1>
             <Row>
                 <Col md={8}>
                     {Object.keys(groupedSeats).map(row => (
@@ -74,14 +74,14 @@ export default function SeatsPage() {
                     {selectedSeat && (
                         <Card className="mb-3">
                             <Card.Body>
-                                <h5>Детали места</h5>
-                                <p><strong>Ряд:</strong> {selectedSeat.rowNumber}</p>
-                                <p><strong>Место:</strong> {selectedSeat.rowNumber}{String.fromCharCode(65 + selectedSeat.seatIndex)}</p>
-                                <p><strong>Класс:</strong> {selectedSeat.seatClass}</p>
-                                <p><strong>Цена:</strong> {selectedSeat.price.toFixed(2)} €</p>
-                                <p><strong>Статус:</strong> {selectedSeat.isOccupied ? "Занято" : "Свободно"}</p>
+                                <h5>Seat Details</h5>
+                                <p><strong>Row:</strong> {selectedSeat.rowNumber}</p>
+                                <p><strong>Seat index:</strong> {selectedSeat.rowNumber}{String.fromCharCode(65 + selectedSeat.seatIndex)}</p>
+                                <p><strong>Class:</strong> {selectedSeat.seatClass}</p>
+                                <p><strong>Price:</strong> {selectedSeat.price.toFixed(2)} €</p>
+                                <p><strong>Status:</strong> {selectedSeat.isOccupied ? "Occupied" : "Free"}</p>
                                 {!selectedSeat.isOccupied && (
-                                    <Button variant="primary" onClick={handleAddSeat}>Добавить</Button>
+                                    <Button variant="primary" onClick={handleAddSeat}>Select</Button>
                                 )}
                             </Card.Body>
                         </Card>
@@ -89,13 +89,13 @@ export default function SeatsPage() {
                     {selectedSeats.length > 0 && (
                         <Card>
                             <Card.Body>
-                                <h5>Выбранные места</h5>
+                                <h5>Selected seats</h5>
                                 <ul>
                                     {selectedSeats.map(seat => (
                                         <li key={seat.id}>{seat.rowNumber}{String.fromCharCode(65 + seat.seatIndex)} - {seat.price.toFixed(2)} €</li>
                                     ))}
                                 </ul>
-                                <Button variant="success" onClick={handlePurchase}>Приобрести билеты</Button>
+                                <Button variant="success" onClick={handlePurchase}>Purchase  tickets</Button>
                             </Card.Body>
                         </Card>
                     )}
