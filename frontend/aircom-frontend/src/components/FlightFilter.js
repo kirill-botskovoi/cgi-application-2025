@@ -31,20 +31,20 @@ export default function FlightFilter({ airports, onApplyFilter }) {
 
     return (
         <div className="filter-container">
-            <Button onClick={() => setShowFilter(!showFilter)}>{showFilter ? 'Скрыть фильтр' : 'Фильтр'}</Button>
+            <Button onClick={() => setShowFilter(!showFilter)}>{showFilter ? 'Hide' : 'Show filter'}</Button>
             <Collapse in={showFilter}>
                 <div>
                     <Form>
                         <Row>
                             <Col>
                                 <Form.Group controlId="departureAirport">
-                                    <Form.Label>Откуда</Form.Label>
+                                    <Form.Label>From</Form.Label>
                                     <Form.Control
                                         as="select"
                                         value={departureAirport}
                                         onChange={(e) => setDepartureAirport(e.target.value)}
                                     >
-                                        <option value="">Все аэропорты</option>
+                                        <option value="">All airports</option>
                                         {airports.map((airport) => (
                                             <option key={airport} value={airport}>{airport}</option>
                                         ))}
@@ -53,13 +53,13 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                             </Col>
                             <Col>
                                 <Form.Group controlId="arrivalAirport">
-                                    <Form.Label>Куда</Form.Label>
+                                    <Form.Label>To</Form.Label>
                                     <Form.Control
                                         as="select"
                                         value={arrivalAirport}
                                         onChange={(e) => setArrivalAirport(e.target.value)}
                                     >
-                                        <option value="">Все аэропорты</option>
+                                        <option value="">All airports</option>
                                         {airports.map((airport) => (
                                             <option key={airport} value={airport}>{airport}</option>
                                         ))}
@@ -70,7 +70,7 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                         <Row>
                             <Col>
                                 <Form.Group controlId="dateFrom">
-                                    <Form.Label>Дата вылета с</Form.Label>
+                                    <Form.Label>Departure date from</Form.Label>
                                     <Form.Control
                                         type="date"
                                         value={dateFrom}
@@ -80,7 +80,7 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                             </Col>
                             <Col>
                                 <Form.Group controlId="dateTo">
-                                    <Form.Label>Дата вылета до</Form.Label>
+                                    <Form.Label>Departure date until</Form.Label>
                                     <Form.Control
                                         type="date"
                                         value={dateTo}
@@ -92,7 +92,7 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                         <Row>
                             <Col>
                                 <Form.Group controlId="timeFrom">
-                                    <Form.Label>Время вылета с</Form.Label>
+                                    <Form.Label>Departure time from</Form.Label>
                                     <Form.Control
                                         type="time"
                                         value={timeFrom}
@@ -102,7 +102,7 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                             </Col>
                             <Col>
                                 <Form.Group controlId="timeTo">
-                                    <Form.Label>Время вылета до</Form.Label>
+                                    <Form.Label>Departure time until</Form.Label>
                                     <Form.Control
                                         type="time"
                                         value={timeTo}
@@ -114,7 +114,7 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                         <Row>
                             <Col>
                                 <Form.Group controlId="flightDuration">
-                                    <Form.Label>Общее время полета (ч)</Form.Label>
+                                    <Form.Label>Flight time (h):</Form.Label>
                                     <Form.Control
                                         type="range"
                                         min="0"
@@ -123,21 +123,13 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                                         value={flightDurationFrom}
                                         onChange={(e) => setFlightDurationFrom(e.target.value)}
                                     />
-                                    <Form.Control
-                                        type="range"
-                                        min="0"
-                                        max="24"
-                                        step="1"
-                                        value={flightDurationTo}
-                                        onChange={(e) => setFlightDurationTo(e.target.value)}
-                                    />
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Row>
                             <Col>
                                 <Form.Group controlId="priceFrom">
-                                    <Form.Label>Цена от</Form.Label>
+                                    <Form.Label>Price from</Form.Label>
                                     <Form.Control
                                         type="number"
                                         value={priceFrom}
@@ -147,7 +139,7 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                             </Col>
                             <Col>
                                 <Form.Group controlId="priceTo">
-                                    <Form.Label>Цена до</Form.Label>
+                                    <Form.Label>Price until</Form.Label>
                                     <Form.Control
                                         type="number"
                                         value={priceTo}
@@ -156,7 +148,7 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Button onClick={handleApply}>Применить</Button>
+                        <Button onClick={handleApply}>Apply</Button>
                     </Form>
                 </div>
             </Collapse>

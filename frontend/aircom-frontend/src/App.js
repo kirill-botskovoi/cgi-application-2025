@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import FlightsPage from "./pages/FlightsPage";
 import PrivateRoute from "./components/PrivateRoute";
 import SeatsPage from "./pages/SeatsPage";
+import ConfirmPurchasePage from "./pages/ConfirmPurchasePage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/confirm-purchase" element={<ConfirmPurchasePage />} />
       </Routes>
     </Router>
   );

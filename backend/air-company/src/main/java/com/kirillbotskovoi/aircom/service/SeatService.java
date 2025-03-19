@@ -27,4 +27,15 @@ public class SeatService {
                         .build())
                 .collect(Collectors.toList());
     }
+
+    public SeatResponseDTO getSeatsBySeatId(Long seatId) {
+        Seat seat = seatRepository.getSeatById(seatId);
+        return SeatResponseDTO.builder()
+                .rowNumber(seat.getRowNumber())
+                .seatIndex(seat.getSeatIndex())
+                .isOccupied(seat.isOccupied())
+                .seatClass(seat.getSeatClass())
+                .price(seat.getPrice())
+                .build();
+    }
 }

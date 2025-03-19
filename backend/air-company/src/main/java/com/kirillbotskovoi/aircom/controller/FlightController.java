@@ -25,7 +25,7 @@ public class FlightController {
     @PostMapping("/fetch")
     public ResponseEntity<String> fetchFlights() {
         flightService.fetchAndSaveFlights();
-        return ResponseEntity.ok("Рейсы загружены успешно");
+        return ResponseEntity.ok("Flights successfully fetched!");
     }
 
     @PostMapping("/generateSeats")
