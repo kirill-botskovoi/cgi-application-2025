@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Form, Collapse, Row, Col } from 'react-bootstrap';
 
-export default function FlightFilter({ airports, onApplyFilter }) {
+export default function FlightFilter({departureAirports, arrivalAirports, onApplyFilter }) {
     const [showFilter, setShowFilter] = useState(false);
     const [departureAirport, setDepartureAirport] = useState('');
     const [arrivalAirport, setArrivalAirport] = useState('');
@@ -45,7 +45,7 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                                         onChange={(e) => setDepartureAirport(e.target.value)}
                                     >
                                         <option value="">All airports</option>
-                                        {airports.map((airport) => (
+                                        {departureAirports.map((airport) => (
                                             <option key={airport} value={airport}>{airport}</option>
                                         ))}
                                     </Form.Control>
@@ -60,7 +60,7 @@ export default function FlightFilter({ airports, onApplyFilter }) {
                                         onChange={(e) => setArrivalAirport(e.target.value)}
                                     >
                                         <option value="">All airports</option>
-                                        {airports.map((airport) => (
+                                        {arrivalAirports.map((airport) => (
                                             <option key={airport} value={airport}>{airport}</option>
                                         ))}
                                     </Form.Control>

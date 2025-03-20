@@ -33,7 +33,7 @@ public class BookingService {
             throw new RuntimeException("Seat already booked");
         }
 
-        seatRepository.getSeatById(seatId).setOccupied(true);
+        seat.setOccupied(true);
 
         return bookingRepository.save(
                 Booking.builder()
