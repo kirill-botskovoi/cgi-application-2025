@@ -2,7 +2,9 @@ package com.kirillbotskovoi.aircom.service;
 
 import com.kirillbotskovoi.aircom.dto.FlightResponseDTO;
 import com.kirillbotskovoi.aircom.entity.Flight;
+import com.kirillbotskovoi.aircom.repository.BookingRepository;
 import com.kirillbotskovoi.aircom.repository.FlightRepository;
+import com.kirillbotskovoi.aircom.repository.SeatRepository;
 import com.kirillbotskovoi.aircom.util.FlightConverter;
 import com.kirillbotskovoi.aircom.util.SeatGenerator;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FlightService {
     private final FlightRepository flightRepository;
+    private final BookingRepository bookingRepository;
+    private final SeatRepository seatRepository;
     private final FlightConverter flightConverter;
     private final RestTemplate restTemplate;
     private final SeatGenerator seatGenerator;
@@ -52,7 +56,6 @@ public class FlightService {
                 LocalDateTime departureTime = departureTimeStr != null ? LocalDateTime.parse(departureTimeStr, FORMATTER) : null;
                 LocalDateTime arrivalTime = arrivalTimeStr != null ? LocalDateTime.parse(arrivalTimeStr, FORMATTER) : null;
 
-                double price = 50 + (int)(Math.random() * ((250 - 50) + 1));
 
                 Flight flight = Flight.builder()
                         .flightNumber(flightNumber)
@@ -79,6 +82,13 @@ public class FlightService {
             flight.setSeats(seatGenerator.generateSeats(flight));
         }
     }
+
+    public void resetTables() {
+        bookingRepository.deleteAll();
+        seatRepository.deleteAll();
+        flightRepository.deleteAll();
+    }
+
 
     public List<FlightResponseDTO> getAllFlights() {
         return flightRepository.findAll().stream()

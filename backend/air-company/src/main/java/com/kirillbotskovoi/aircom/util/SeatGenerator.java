@@ -66,7 +66,6 @@ public class SeatGenerator {
 
         int firstClassRows = (int) (totalRows * firstClassRatio);
         int businessClassRows = (int) (totalRows * businessClassRatio);
-        int economyClassRows = totalRows - firstClassRows - businessClassRows;
 
         double rawOccupancyRate = minOccupancy + (maxOccupancy - minOccupancy) * random.nextDouble();
         int occupancyRate = (int) Math.round(rawOccupancyRate * 100);
