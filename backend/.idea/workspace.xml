@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8809541-ad8d-4517-be13-03440a08e76a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/dto/BookingResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/util/BookingConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/controller/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/service/BookingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/util/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/util/JwtUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

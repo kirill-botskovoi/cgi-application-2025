@@ -47,10 +47,10 @@ public class JwtUtil {
 
     public String getNameFromJwt(String token) {
         JwtParser jwtParser = Jwts.parserBuilder()
-                .setSigningKey(getSigningKey()) // Updated parser method
+                .setSigningKey(getSigningKey())
                 .build();
 
         Claims claims = jwtParser.parseClaimsJws(token).getBody();
-        return claims.getSubject(); // Extract subject (username)
+        return claims.getSubject();
     }
 }
