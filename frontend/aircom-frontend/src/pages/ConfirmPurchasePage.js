@@ -1,10 +1,9 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Container, Card, Button, Form, Alert } from "react-bootstrap";
 
 export default function ConfirmPurchasePage() {
     const location = useLocation();
-    const navigate = useNavigate();
     const [seatsDetails, setSeatsDetails] = useState([]);
     const [email, setEmail] = useState("");
     const [alertMessage, setAlertMessage] = useState(null);

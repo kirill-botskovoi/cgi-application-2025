@@ -1,5 +1,6 @@
 package com.kirillbotskovoi.aircom.controller;
 
+import com.kirillbotskovoi.aircom.dto.BookingResponseDTO;
 import com.kirillbotskovoi.aircom.entity.Booking;
 import com.kirillbotskovoi.aircom.service.BookingService;
 import com.kirillbotskovoi.aircom.util.JwtUtil;
@@ -38,7 +39,7 @@ public class BookingController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Booking>> getUserBookings(HttpServletRequest httpRequest) {
+    public ResponseEntity<List<BookingResponseDTO>> getUserBookings(HttpServletRequest httpRequest) {
         String token = httpRequest.getHeader("Authorization");
         if (token == null || !token.startsWith("Bearer ")) {
             return ResponseEntity.badRequest().body(null);
@@ -49,7 +50,8 @@ public class BookingController {
             return ResponseEntity.status(403).body(null);
         }
 
-        List<Booking> bookings = bookingService.getUserBookings(email);
+        List<BookingResponseDTO> bookings = bookingService.getUserBookings(email);
+
         return ResponseEntity.ok(bookings);
     }
 }

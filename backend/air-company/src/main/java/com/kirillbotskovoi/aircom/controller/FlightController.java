@@ -34,4 +34,10 @@ public class FlightController {
         return ResponseEntity.ok("Seats successfully generated!");
     }
 
+    @PostMapping("/reset")
+    public ResponseEntity<String> resetTables() {
+        flightService.resetTables();
+        return ResponseEntity.ok("All bookings, seats, and flights have been successfully deleted.");
+    }
+
 }

@@ -3,7 +3,6 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import FlightFilter from "../components/FlightFilter";
 
-
 export default function FlightsPage() {
     const [flights, setFlights] = useState([]);
     const [filteredFlights, setFilteredFlights] = useState([]);
@@ -49,22 +48,59 @@ export default function FlightsPage() {
         if (filters.departureAirport) {
             filtered = filtered.filter(flight => flight.departureAirport === filters.departureAirport);
         }
+
         if (filters.arrivalAirport) {
             filtered = filtered.filter(flight => flight.arrivalAirport === filters.arrivalAirport);
         }
 
-        if (filters.dateFrom) {
-            filtered = filtered.filter(flight => new Date(flight.departureTime) >= new Date(filters.dateFrom));
+        if (filters.departureDate) {
+            const departureDate = new Date(filters.departureDate);
+            departureDate.setHours(0, 0, 0, 0);
+            filtered = filtered.filter(flight => {
+                const flightDate = new Date(flight.departureTime);
+                flightDate.setHours(0, 0, 0, 0);
+                return flightDate.getTime() === departureDate.getTime();
+            });
         }
-        if (filters.dateTo) {
-            filtered = filtered.filter(flight => new Date(flight.departureTime) <= new Date(filters.dateTo));
+
+        if (filters.arrivalDate) {
+            const arrivalDate = new Date(filters.arrivalDate);
+            arrivalDate.setHours(0, 0, 0, 0);
+            filtered = filtered.filter(flight => {
+                const flightArrivalDate = new Date(flight.arrivalTime);
+                flightArrivalDate.setHours(0, 0, 0, 0);
+                return flightArrivalDate.getTime() === arrivalDate.getTime();
+            });
         }
 
         if (filters.timeFrom) {
-            filtered = filtered.filter(flight => new Date(flight.departureTime).getHours() >= new Date(`1970-01-01T${filters.timeFrom}:00`).getHours());
+            filtered = filtered.filter(flight => {
+                const flightTime = new Date(flight.departureTime);
+                const [hoursFrom, minutesFrom] = filters.timeFrom.split(':').map(Number);
+                return flightTime.getHours() > hoursFrom || 
+                    (flightTime.getHours() === hoursFrom && flightTime.getMinutes() >= minutesFrom);
+            });
         }
+
         if (filters.timeTo) {
-            filtered = filtered.filter(flight => new Date(flight.departureTime).getHours() <= new Date(`1970-01-01T${filters.timeTo}:00`).getHours());
+            filtered = filtered.filter(flight => {
+                const flightTime = new Date(flight.departureTime);
+                const [hoursTo, minutesTo] = filters.timeTo.split(':').map(Number);
+                return flightTime.getHours() < hoursTo || 
+                    (flightTime.getHours() === hoursTo && flightTime.getMinutes() <= minutesTo);
+            });
+        }
+
+        if (filters.priceFrom || filters.priceTo) {
+            filtered = filtered.filter(flight => {
+                if (!priceRanges[flight.id]) return false;
+
+                const { minPrice, maxPrice } = priceRanges[flight.id];
+                return (
+                    (!filters.priceFrom || filters.priceFrom <= maxPrice) &&
+                    (!filters.priceTo || filters.priceTo >= minPrice)
+                );
+            });
         }
 
         setFilteredFlights(filtered);
@@ -73,11 +109,13 @@ export default function FlightsPage() {
     return (
         <div className="container mt-4">
             <h1 className="text-center mb-4">Flights</h1>
-            <FlightFilter 
-                departureAirports={departureAirports} 
-                arrivalAirports={arrivalAirports} 
-                onApplyFilter={handleFilterApply} 
-            />
+            <div className="mb-3">
+                <FlightFilter
+                    departureAirports={departureAirports}
+                    arrivalAirports={arrivalAirports}
+                    onApplyFilter={handleFilterApply}
+                />
+            </div>
             <div className="row">
                 {filteredFlights.map(flight => (
                     <div key={flight.id} className="col-md-4">
@@ -87,12 +125,13 @@ export default function FlightsPage() {
                                 <p className="card-text"><strong>From:</strong> {flight.departureAirport}</p>
                                 <p className="card-text"><strong>To:</strong> {flight.arrivalAirport}</p>
                                 <p className="card-text"><strong>Departure time:</strong> {new Date(flight.departureTime).toLocaleString()}</p>
+                                <p className="card-text"><strong>Arrival time:</strong> {new Date(flight.arrivalTime).toLocaleString()}</p>
                                 <p className="card-text">
-                                    <strong>Price range:</strong> {priceRanges[flight.id] 
-                                        ? `${priceRanges[flight.id].minPrice} - ${priceRanges[flight.id].maxPrice} EUR` 
+                                    <strong>Price range:</strong> {priceRanges[flight.id]
+                                        ? `${priceRanges[flight.id].minPrice} - ${priceRanges[flight.id].maxPrice} EUR`
                                         : "Loading..."}
                                 </p>
-                                <Button 
+                                <Button
                                     variant="primary"
                                     onClick={() => navigate(`/seats/${flight.id}`)}
                                 >
