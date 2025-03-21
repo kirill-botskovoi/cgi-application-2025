@@ -82,7 +82,6 @@ export default function ConfirmPurchasePage() {
             }
 
             setAlertMessage("Success! Tickets are sent to email");
-            setTimeout(() => navigate("/"), 3000);
         } catch (error) {
             console.error("Error while booking", error);
             setAlertMessage(error.message || "Error while booking");

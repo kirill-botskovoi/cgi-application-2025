@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/seats")
@@ -24,6 +25,11 @@ public class SeatController {
     @GetMapping("/{seatId}")
     public ResponseEntity<SeatResponseDTO> getSeatById(@PathVariable Long seatId){
         return ResponseEntity.ok(seatService.getSeatsBySeatId(seatId));
+    }
+
+    @GetMapping("/flight/{flightId}/price-range")
+    public ResponseEntity<Map<String, Double>> getPriceRange(@PathVariable Long flightId) {
+        return ResponseEntity.ok(seatService.getPriceRangeByFlightId(flightId));
     }
 
 }

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,7 +30,11 @@ public class SeatService {
     }
 
     public SeatResponseDTO getSeatsBySeatId(Long seatId) {
-        Seat seat = seatRepository.getSeatById(seatId);
+
+        Seat seat = seatRepository.getSeatById(seatId)
+                .orElseThrow(() -> new RuntimeException("Seat not found"));
+
+
         return SeatResponseDTO.builder()
                 .rowNumber(seat.getRowNumber())
                 .seatIndex(seat.getSeatIndex())
@@ -38,4 +43,11 @@ public class SeatService {
                 .price(seat.getPrice())
                 .build();
     }
+
+    public Map<String, Double> getPriceRangeByFlightId(Long flightId) {
+        Double minPrice = seatRepository.findMinPriceByFlightId(flightId);
+        Double maxPrice = seatRepository.findMaxPriceByFlightId(flightId);
+        return Map.of("minPrice", minPrice, "maxPrice", maxPrice);
+    }
+
 }
