@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Service for managing flights and their related operations.
+ */
 @Service
 @RequiredArgsConstructor
 public class FlightService {
@@ -28,21 +31,19 @@ public class FlightService {
     private final FlightConverter flightConverter;
     private final RestTemplate restTemplate;
     private final SeatGenerator seatGenerator;
-
     @Value("${aviationstack.api.key}")
     private String apiKey;
-
-
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
+    /**
+     * Fetches flight data from an external API and saves it to the database.
+     */
     public void fetchAndSaveFlights() {
         String url = "http://api.aviationstack.com/v1/flights?access_key=" + apiKey;
-
         Map<String, Object> response = restTemplate.getForObject(url, Map.class);
         if (response == null || !response.containsKey("data")) {
             throw new RuntimeException("API fetch error");
         }
-
         List<Map<String, Object>> flightsData = (List<Map<String, Object>>) response.get("data");
         for (Map<String, Object> flightData : flightsData) {
             try {
@@ -56,7 +57,6 @@ public class FlightService {
                 LocalDateTime departureTime = departureTimeStr != null ? LocalDateTime.parse(departureTimeStr, FORMATTER) : null;
                 LocalDateTime arrivalTime = arrivalTimeStr != null ? LocalDateTime.parse(arrivalTimeStr, FORMATTER) : null;
 
-
                 Flight flight = Flight.builder()
                         .flightNumber(flightNumber)
                         .departureAirport(departureAirport)
@@ -65,7 +65,6 @@ public class FlightService {
                         .arrivalTime(arrivalTime)
                         .seats(null)
                         .build();
-
 
                 flight.setSeats(seatGenerator.generateSeats(flight));
 

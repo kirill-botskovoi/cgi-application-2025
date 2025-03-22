@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Generator for creating seats for flights based on configuration.
+ */
 @Component
 @RequiredArgsConstructor
 public class SeatGenerator {
@@ -59,6 +62,12 @@ public class SeatGenerator {
 
     private final Random random = new Random();
 
+    /**
+     * Generates a list of seats for a given flight.
+     *
+     * @param flight the flight for which seats should be generated.
+     * @return a list of seats for the flight.
+     */
     public List<Seat> generateSeats(Flight flight) {
         List<Seat> seats = new ArrayList<>();
         int totalRows = random.nextInt(maxRows - minRows + 1) + minRows;
@@ -96,7 +105,7 @@ public class SeatGenerator {
 
             for (int seatNum = 1; seatNum <= seatsPerRow; seatNum++) {
                 boolean isOccupied = occupancyList.get(seatIndex++);
-                double seatPrice = (double) basePrice * priceMultiplier;
+                double seatPrice = basePrice * priceMultiplier;
 
                 seats.add(Seat.builder()
                         .rowNumber(row)

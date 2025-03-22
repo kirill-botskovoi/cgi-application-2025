@@ -8,9 +8,18 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Converter for transforming Flight objects into FlightResponseDTO.
+ */
 @Component
 public class FlightConverter {
 
+    /**
+     * Converts a Flight object to FlightResponseDTO.
+     *
+     * @param flight the flight to be converted.
+     * @return a FlightResponseDTO containing flight details.
+     */
     public FlightResponseDTO convertToDto(Flight flight) {
         List<Long> seatIds = flight.getSeats().stream()
                 .map(Seat::getId)
