@@ -14,13 +14,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST controller for handling authentication (sign-up and sign-in).
+ */
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost")
 public class SecurityController {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
@@ -43,6 +44,13 @@ public class SecurityController {
     public void setJwtUtil(JwtUtil jwtUtil){
         this.jwtUtil = jwtUtil;
     }
+
+    /**
+     * Handles user registration (sign-up).
+     *
+     * @param signupRequestDTO the user registration data.
+     * @return a success message or an error if the username or email is already taken.
+     */
     @PostMapping("/signup")
     ResponseEntity<?> signup(@RequestBody SignupRequestDTO signupRequestDTO){
         if(userRepository.existsByUsername(signupRequestDTO.getUsername())){
@@ -51,7 +59,6 @@ public class SecurityController {
         if(userRepository.existsByEmail(signupRequestDTO.getEmail())){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Choose different email");
         }
-
         userRepository.save(User.builder()
                 .username(signupRequestDTO.getUsername())
                 .email(signupRequestDTO.getEmail())
@@ -59,6 +66,13 @@ public class SecurityController {
                 .build());
         return ResponseEntity.ok("Success, baby");
     }
+
+    /**
+     * Handles user login (sign-in).
+     *
+     * @param signinRequestDTO the user login data.
+     * @return a generated JWT token or an unauthorized response if the login fails.
+     */
     @PostMapping("/signin")
     ResponseEntity<?> signin(@RequestBody SigninRequestDTO signinRequestDTO){
         Authentication authentication = null;
@@ -71,5 +85,4 @@ public class SecurityController {
         String jwt = jwtUtil.generateToken(authentication);
         return ResponseEntity.ok(jwt);
     }
-
 }

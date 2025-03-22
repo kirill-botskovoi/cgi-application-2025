@@ -17,6 +17,8 @@ function Register() {
     }
   };
 
+  console.log(window.location.origin);
+
   return (
     <div className="container mt-5">
       <h2>Register</h2>
