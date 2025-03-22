@@ -1,0 +1,25 @@
+# Используем Node.js для сборки фронтенда
+FROM node:18 as build-stage
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем package.json и устанавливаем зависимости
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Копируем исходный код и собираем проект
+COPY . .
+RUN npm run build
+
+# Используем Nginx для раздачи фронтенда
+FROM nginx:alpine
+
+# Копируем собранный фронтенд в Nginx
+COPY --from=build-stage /app/build /usr/share/nginx/html
+
+# Открываем порт 80
+EXPOSE 80
+
+# Запускаем Nginx
+CMD ["nginx", "-g", "daemon off;"]

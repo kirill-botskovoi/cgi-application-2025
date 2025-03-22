@@ -5,8 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8809541-ad8d-4517-be13-03440a08e76a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/air-company/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/util/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/util/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/air-company/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/air-company/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/air-company/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/air-company/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/controller/SecurityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/air-company/src/main/java/com/kirillbotskovoi/aircom/controller/SecurityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/air-company/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/air-company/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/node_modules/.cache/default-development/7.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/node_modules/.cache/default-development/7.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/node_modules/.cache/default-development/8.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/node_modules/.cache/default-development/8.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/node_modules/.cache/default-development/index.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/ConfirmPurchasePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/ConfirmPurchasePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/FlightsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/FlightsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/SeatsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/aircom-frontend/src/pages/SeatsPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,18 +70,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "pc",
-    "last_opened_file_path": "/Users/rr4/Docs/github/cgi-application-2025/backend",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;pc&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/rr4/Docs/github/cgi-application-2025/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Gradle.air-company [bootRun]">
+}</component>
+  <component name="RunManager" selected="Gradle.AirCompanyApplicationTests">
+    <configuration name="AirCompanyApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/air-company" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.kirillbotskovoi.aircom.AirCompanyApplicationTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="air-company [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -88,6 +131,50 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="air-company [resolveTestMainClassName]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/air-company" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="resolveTestMainClassName" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="air-company [testClasses]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/air-company" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="testClasses" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="AirCompanyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="aircom.main" />
@@ -98,6 +185,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.AirCompanyApplicationTests" />
+        <item itemvalue="Gradle.air-company [resolveTestMainClassName]" />
+        <item itemvalue="Gradle.air-company [testClasses]" />
         <item itemvalue="Gradle.air-company [bootRun]" />
       </list>
     </recent_temporary>
@@ -111,6 +201,10 @@
       <option name="presentableId" value="Default" />
       <updated>1741635818883</updated>
       <workItem from="1741635819906" duration="243000" />
+      <workItem from="1742528882508" duration="596000" />
+      <workItem from="1742552949316" duration="799000" />
+      <workItem from="1742555131110" duration="2746000" />
+      <workItem from="1742666131447" duration="2310000" />
     </task>
     <servers />
   </component>

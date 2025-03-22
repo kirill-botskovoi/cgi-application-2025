@@ -1,0 +1,19 @@
+# 1. Используем Gradle-образ с JDK 17
+FROM gradle:8.7-jdk21 AS build-stage
+WORKDIR /app
+
+# 2. Копируем проект
+COPY . .
+
+# 3. Сборка проекта БЕЗ тестов + логирование
+RUN gradle build -x test && ls -l build/libs
+
+# 4. Используем минимальный JDK-образ для запуска
+FROM openjdk:21-jdk-slim
+WORKDIR /app
+
+# 5. Проверяем название JAR-файла
+COPY --from=build-stage /app/build/libs/*.jar app.jar
+
+# 6. Запускаем приложение
+CMD ["java", "-jar", "app.jar"]
