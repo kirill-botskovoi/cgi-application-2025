@@ -1,6 +1,6 @@
-# CGI Flight Booking Application  
+# CGI Flight Booking Application by Kirill Botškovoi
 
-This repository was created as part of a test assignment for CGI to complete an internship. The application is a service for purchasing airline tickets.  
+This repository was created as part of a test assignment for CGI to complete an internship. The application is a service for purchasing airline tickets.
 
 ## Technology Stack  
 - **Back-end**: Spring Boot  
@@ -13,7 +13,7 @@ This repository was created as part of a test assignment for CGI to complete an 
 
 - **Front-end**: React  
   Pages for registration, authentication, and flight listings have been implemented. Only authorized users can book seats on flights.  
-  On the **Dashboard** page, a user can upload new flights via the API or remove them from the database. Additionally, all tickets purchased by the user are displayed.  Used Bootstrap for designing 
+  On the **Dashboard** page, a user can upload new flights via the API or remove them from the database. Additionally, all tickets purchased by the user are displayed. Also used Bootstrap for designing 
 
 - **Database**: PostgreSQL  
   Spring Data JPA was used for database operations.  
@@ -43,14 +43,16 @@ This repository was created as part of a test assignment for CGI to complete an 
 - Optimize database queries to enhance performance.
 - Implement email notifications for booking confirmations.
 - Introduce payment options.
+- Write tests! Both Api and UX tests. I would you selenide for UX tests and unit tests for Api tests
 
 ## Spent time
-Approximately 40 hours were spent on development, including:
+From 40 to 50 hours were spent on development, including:
 - Backend development: 15 hours
-- Frontend development: 20 hours
-- Debugging and testing: 5 hours
+- Frontend development: 20-25 hours
+- Debugging and testing: 5-10 hours
 
 ## Stackoverflow, AI, YouTube
-- Referenced YouTube tutorials for setting up JWT authentication
-- Used AI tools to generate setup for alogrithms of generationg flight seats
+- Referenced YouTube tutorials for setting up JWT authentication [https://www.youtube.com/watch?v=wcbqwYFfG70&t=2235s]
+- Used ChatGPT to generate setup for alogrithms of generationg flight seats and some React Function
+- Used my "base" projects on Spring Boot for faster basic setup for development
 
