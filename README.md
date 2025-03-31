@@ -26,7 +26,7 @@ This repository was created as part of a test assignment for CGI to complete an 
 ## Installation Guide  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/kirill-botskovoi/cgi-application-202
+   git clone https://github.com/kirill-botskovoi/cgi-application-2025
 
    cd cgi-application-2025
    ```
